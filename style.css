@@ -10,13 +10,14 @@ html {
     font-size: 16px;
 }
 body {
-    font-family: Arial, sans-serif;
+    background-color: blanchedalmond;
+    font-family: Comic Sans MS, Comic Sans, cursive;
     -webkit-font-smoothing: antialiased;
-    background: #cecece;
     line-height: 20px;
     color: #333;
 }
 .container {
+
     width: 1440px;
     max-width: 100%;
     margin: 0 auto;
@@ -24,7 +25,12 @@ body {
 }
 .header {
     padding: 40px;
-    background-image: linear-gradient(to right, #fff, #fefefe);
+    background-image: url(images/top.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-origin: content-box;
+    background-size: cover;
+    min-height:40px;
     padding: 40px 0;
 }
 .main {
@@ -33,7 +39,7 @@ body {
 table {
     border-collapse: collapse;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
-    background-color: #fff;
+    background-color: blanchedalmond;
     margin-right: 40px;
 }
 table tr td,
@@ -55,6 +61,8 @@ form {
     margin-right: 40px;
 }
 form input {
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    color: brown;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #333;
@@ -62,6 +70,7 @@ form input {
     border-radius: 3px;
 }
 form dl dt {
+    font-family: Comic Sans MS, Comic Sans, cursive;
     margin-bottom: 5px;
     font-weight: 700;
 }
@@ -69,6 +78,8 @@ form dl dt {
     display: flex;
 }
 form select {
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    color: brown;
     padding: 10px;
     border: 1px solid #333;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
@@ -94,4 +105,15 @@ form h2 {
 }
 .saveBtn {
     color: green;
+}
+.sub{
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    text-align: center;
+    color: navy;
+    width: auto;
+    border-radius: 15px;
+}
+.text{
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    color: navy;
 }

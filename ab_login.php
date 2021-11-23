@@ -13,22 +13,27 @@ if (!empty($_POST['login']) && !empty($_POST['pass'])){
     $sool='tavalinetext';
     $krypt=crypt($pass,$sool);
     //проверка, что пароль и логин есть в базе данных
-    $paring="SELECT * FROM kasutajad WHERE nimi='$login' AND parool='$krypt'";
-    $yhendus=mysqli_query($connection,$paring);
-    if(mysqli_num_rows($yhendus)==1){
-        $_SESSION['tuvastamine']='Tere!';
-        if($login=='valeria'){
-            header('Location: index.php');
-        }
-        if($login=='kasutaja1'){
-            header('Location: tava.php');
-        }
-        if($login=='kasutaja2'){
-            header('Location: vaata.php');
+    $paring="SELECT nimi, onAdmin, koduleht FROM kasutajad WHERE nimi=? AND parool=?";
+    $kask=$connection->prepare($paring);
+    $kask->bind_param("ss", $login, $krypt);
+    $kask->bind_result($nimi, $onAdmin, $koduleht);
+    $kask->execute();
+    //$yhendus=mysqli_query($connection, $paring);
+    //if(mysqli_num_rows($yhendus)==1){
+    if ($kask->fetch()) {
+        $_SESSION['tuvastamine'] = 'misiganes';
+        $_SESSION['kasutaja'] = $nimi;
+        $_SESSION['onAdmin'] = $onAdmin;
+        if (isset($koduleht)) {
+            header("Location: $koduleht");
+            exit();
+        } else {
+            header("Location: index.php");
+            exit();
         }
     }
-    else{
-        echo "Kasutaja või parool on valed";
+    else {
+        echo "Kasutaja $login või parool on valed";
     }
 
     /*if ($login='admin' && $pass='admin'){
@@ -37,17 +42,25 @@ if (!empty($_POST['login']) && !empty($_POST['pass'])){
     }*/
 }
 ?>
-<h1>Login vorm</h1>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="logstyle.css">
+        <title>Kaubad ja kaubagruppid login vorm</title>
+    </head>
+    <body>
+<h1 class="text">Login vorm</h1>
 <table>
     <form action="" method="post">
     <tr>
-        <td>Kasutaja nimi:</td>
+        <td class="text">Kasutaja nimi:</td>
         <td>
             <input type="text" name="login" placeholder="Kasutajanimi">
         </td>
     </tr>
         <tr>
-        <td>Salasõna:</td>
+        <td class="text">Salasõna:</td>
         <td>
             <input type="password" name="pass">
         </td>
@@ -55,7 +68,7 @@ if (!empty($_POST['login']) && !empty($_POST['pass'])){
         <tr>
             <td></td>
             <td>
-                <input type="submit" value="Logi sisse">
+                <input type="submit" value="Logi sisse" class="sub">
             </td>
         </tr>
     </form>

@@ -1,6 +1,11 @@
 <?php
 require ('conf.php');
 
+function isAdmin()
+{
+    return $_SESSION["onAdmin"] == 1;
+}
+
 function groupData($sort_by = "kaubanimi", $search_term = "") {
     global $connection;
     $sort_list = array("kaubanimi", "hind", "kaubagrupp");
