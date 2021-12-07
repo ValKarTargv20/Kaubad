@@ -1,5 +1,4 @@
 <?php
-$connection = new mysqli('localhost', 'valeriakarpova20', '123456', 'valeriakarpova20');
+$connection = new mysqli('localhost', 'juku', 'kala', 'jukubaas');
 $connection->set_charset('UTF8');
 ?>
-

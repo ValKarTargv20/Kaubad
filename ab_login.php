@@ -2,10 +2,6 @@
 require("conf.php");
 global $connection;
 session_start();
-/*if (!isset($_SESSION['tuvastamine'])) {
-    header('Location: index.php');
-    exit();
-}*/
 if (!empty($_POST['login']) && !empty($_POST['pass'])){
     $login=htmlspecialchars(trim($_POST['login']));
     $pass=htmlspecialchars(trim($_POST['pass']));
@@ -18,8 +14,6 @@ if (!empty($_POST['login']) && !empty($_POST['pass'])){
     $kask->bind_param("ss", $login, $krypt);
     $kask->bind_result($nimi, $onAdmin, $koduleht);
     $kask->execute();
-    //$yhendus=mysqli_query($connection, $paring);
-    //if(mysqli_num_rows($yhendus)==1){
     if ($kask->fetch()) {
         $_SESSION['tuvastamine'] = 'misiganes';
         $_SESSION['kasutaja'] = $nimi;
@@ -35,19 +29,15 @@ if (!empty($_POST['login']) && !empty($_POST['pass'])){
     else {
         echo "Kasutaja $login või parool on valed";
     }
-
-    /*if ($login='admin' && $pass='admin'){
-        $_SESSION['tuvastamine']='Tere!';
-        header('Location: index.php');
-    }*/
 }
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="logstyle.css">
-        <title>Kaubad ja kaubagruppid login vorm</title>
+        <!--<link rel="stylesheet" href="logstyle.css">-->
+        <title>Jalgrattaeksami login vorm</title>
     </head>
     <body>
 <h1 class="text">Login vorm</h1>
